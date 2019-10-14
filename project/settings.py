@@ -17,7 +17,6 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -52,9 +51,11 @@ INSTALLED_APPS = [
 ]
 
 #CorsMiddleware should be placed as high as possible, 
-# especially before any middleware that can generate responses s
+# especially before any middleware that can generate responses 
+#whitenoise to deploy to heroku
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -178,9 +179,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Deploy heroku
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SITE_ID=1
 
